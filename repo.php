@@ -18,39 +18,33 @@
 
                         <!-- RGB Editor Aligned to Left Column -->
                         <div class="container">
+                            <!-- Upload Form -->
                             <form method="POST" enctype="multipart/form-data">
-                                <!-- Red -->
-                                <input type="checkbox" id="red" name="rgba[]" value="r">
-                                <label to="red" id="r">R</label>
-
-                                <br>
-                                <br>
-
-                                <!-- Green -->
-                                <input type="checkbox" id="green" name="rgba[]" value="g">
-                                <label to="green" id="g">G</label>
-
-                                <br>
-                                <br>
-
-                                <!-- Blue -->
-                                <input type="checkbox" id="blue" name="rgba[]" value="b">
-                                <label to="blue" id="b">B</label>
-
-                                <br>
-                                <br>
-
-                                <!-- Alpha -->
-                                <input type="checkbox" id="alpha" name="rgba[]">
-                                <label to="alpha" id="a">A</label>
-
-                                <br>
-                                <br>
-
-                                <!-- File Upload -->
-                                <input type="file" name="image" id="image">
-                                <br>
+                                <h4>Upload Image</h4>
+                                <input type="file" name="image" id="image" accept="image/gif,image/jpeg,image/png">
+                                <br><br>
                                 <input type="submit" name="sub_btn" id="submit" class="btn btn-primary btn-sm" value="Upload Image File">
+                            </form>
+
+                            <hr>
+
+                            <!-- Scan Form -->
+                            <form method="POST" enctype="multipart/form-data">
+                                <h4>Color Scan Options</h4>
+                                
+                                <label>R</label>
+                                <input type="checkbox" id="red" name="rgba[]" value="r">
+                                
+                                <label>G</label>
+                                <input type="checkbox" id="green" name="rgba[]" value="g">
+                                
+                                <label>B</label>
+                                <input type="checkbox" id="blue" name="rgba[]" value="b">
+                                
+                                <label>A</label>
+                                <input type="checkbox" id="alpha" name="rgba[]">
+                                
+                                <br><br>
                                 <input type="submit" name="scan" id="scan" class="btn btn-primary btn-sm" value="Scan Image">
                             </form>
                         </div>
