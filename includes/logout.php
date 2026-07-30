@@ -1,6 +1,5 @@
 <?php
 	include_once 'functions.php';
-	session_start();
 
 	// remove all session variables
 	$_SESSION = array();

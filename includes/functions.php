@@ -6,7 +6,7 @@
 		session_name($session_name); 		// set a session name
 
 		// Stops JavaScript being able to access the session id.
-		$secure = true;
+    	$secure = FALSE;   // Set to TRUE in production with HTTPS
 		// Force sessions to only use cookies.
 		$httponly = true;
 
