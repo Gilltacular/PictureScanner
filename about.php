@@ -52,19 +52,19 @@
             </ul>
           </div>
         </div>
-        <li class="list-group-item list-group-item-info">
+         <li class="list-group-item list-group-item-success">
           Users are able to upload an image
         </li>
-        <li class="list-group-item list-group-item-info">
+        <li class="list-group-item list-group-item-success">
           Database stores the image in the user's photo table
         </li>
-        <li class="list-group-item list-group-item-info">
+        <li class="list-group-item list-group-item-warning">
           Users are able to search for an image based on search criteria
         </li>
-        <li class="list-group-item list-group-item-info">
+        <li class="list-group-item list-group-item-warning">
           System uses the search criteria to retrieve images from the database with the matching criteria
         </li>
-        <li class="list-group-item list-group-item-info">
+        <li class="list-group-item list-group-item-warning">
           System displays the images to the user
         </li>
         <li class="list-group-item list-group-item-success">
