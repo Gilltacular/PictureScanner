@@ -1,0 +1,17 @@
+# OS files
+.DS_Store
+Thumbs.db
+~$*
+
+# IDE files
+.vscode/
+.idea/
+
+# Environment/config files with credentials
+includes/psl-config.local.php
+
+# Temporary files
+*.tmp
+*.log
+uploads/*
+!uploads/.gitkeep
