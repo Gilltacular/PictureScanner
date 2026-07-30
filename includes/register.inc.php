@@ -6,7 +6,7 @@
 
 	if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
 		// validate and sanitize passed data
-		$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+		$username = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['username']);
 		$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 		$email = filter_var($email, FILTER_VALIDATE_EMAIL);
 
@@ -15,7 +15,7 @@
 			$error_msg .= '<p class="error">The email address you entered is invalid.</p>';
 		}
 
-		$password = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
+		$password = $_POST['p'];
 
 		if (strlen($password) != 128) {
 			// make sure password is 128 characters for hash
