@@ -151,12 +151,10 @@
 						$count--;
 						$arr[$key] = $value;
 					}
-					echo $arr;
 					return $arr;
 				}
 				else
 				{
-					echo $hexarray;
 					return $hexarray;
 				}
 			}
