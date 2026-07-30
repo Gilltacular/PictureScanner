@@ -1,5 +1,5 @@
 <?php
-    $error = filter_input(INPUT_GET, 'err', $filter = FILTER_SANITIZE_STRING);
+    $error = isset($_GET['err']) ? htmlspecialchars($_GET['err'], ENT_QUOTES, 'UTF-8') : '';
      
     if (! $error) {
         $error = 'Oops! An unknown error happened.';
