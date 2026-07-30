@@ -31,7 +31,7 @@
 			$stmt->execute();
 			$stmt->store_result();
 
-			if ($stmt->numrows == 1) {
+			if ($stmt->num_rows == 1) {
 				$error_msg .= '<p class="error">A user with this email address already exists. </p>';
 				$stmt->close();
 			}

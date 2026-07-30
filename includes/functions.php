@@ -171,79 +171,73 @@
 	}
 
 	function Upload($image, $folder){
-			$conn = mysqli_connect("localhost", "root", "", "pic_scanner");
-			mysqli_select_db($conn, "pic_scanner");
+			global $mysqli;
 
 			$image = $_FILES['image']['name'];
 			$folder = "uploads/";
 
-			move_uploaded_file($_FILES['image']['tmp_name'], $folder . $_FILES['image']['name']);
-			$sql = "INSERT INTO photos(image_name, image_path) VALUES('$image', '$folder')";
+			// Sanitize filename
+			$image = preg_replace('/[^a-zA-Z0-9._-]/', '_', $image);
 
-			$result = mysqli_query($conn, $sql);
+			move_uploaded_file($_FILES['image']['tmp_name'], $folder . $image);
 
-			if($result){
-			    echo "<br>Image uploaded";
-			}else{
-			    echo "<br>Image not uploaded";
+			if ($stmt = $mysqli->prepare("INSERT INTO photos(image_name, image_path) VALUES(?, ?)")) {
+					$stmt->bind_param('ss', $image, $folder);
+					$stmt->execute();
+
+					if($stmt->affected_rows > 0){
+							echo "<br>Image uploaded";
+					}else{
+							echo "<br>Image not uploaded";
+					}
+					$stmt->close();
 			}
 	}
 
 	function Display($image_name, $image_path){
-			$conn = mysqli_connect("localhost", "root", "", "pic_scanner");
-			mysqli_select_db($conn, "pic_scannner");
-
-			$sql = "SELECT * FROM photos
-							WHERE image_name = '$image_name'
-							AND image_path = '$image_path'";
-			$result = mysqli_query($conn, $sql);
+			global $mysqli;
 
 			$folder = "uploads/";
 
-			if($opendir = opendir($folder)){
-					while(($file = readdir($opendir)) !== FALSE){
-							if($file != "." && $file != ".."){
-									echo "<img src='$folder/$file' id='myImg' class='img-responsive thumbnail' width='300' height='300'>";
+			if ($stmt = $mysqli->prepare("SELECT image_name, image_path FROM photos WHERE image_name = ? AND image_path = ?")) {
+					$stmt->bind_param('ss', $image_name, $image_path);
+					$stmt->execute();
+					$result = $stmt->get_result();
 
-									// The Modal
-									echo "<div id='myModal' class='modal'>";
+					if($opendir = opendir($folder)){
+							while(($file = readdir($opendir)) !== FALSE){
+									if($file != "." && $file != ".."){
+											$safe_file = htmlspecialchars($file, ENT_QUOTES, 'UTF-8');
+											echo "<img src='uploads/" . $safe_file . "' id='myImg' class='img-responsive thumbnail' width='300' height='300'>";
 
-											// The Close Button
-											echo "<span class='close' onclick='document.getElementById(\'myModal\').style.display=\'none\'>&times;</span>";
-
-											// Modal Content (The Image)
+											// The Modal
+											echo "<div id='myModal' class='modal'>";
+											echo "<span class='close' onclick=\"document.getElementById('myModal').style.display='none'\">&times;</span>";
 											echo "<img class='modal-content' id='img01'>";
-
-											// Modal Caption (Image Text)
 											echo "<div id='caption'></div>";
-									echo "</div>";
+											echo "</div>";
 
-									echo "<script>
-											// Get the modal
-											var modal = document.getElementById('myModal');
-
-											// Get the image and insert it inside the modal - use its 'alt' text as a caption
-											var img = document.getElementById('myImg');
-											var modalImg = document.getElementById('img01');
-											var captionText = document.getElementById('caption');
-											img.onclick = function(){
-													modal.style.display = 'block';
-													modalImg.src = this.src;
-													captionText.innerHTML = this.alt;
-											}
-
-											// Get the <span> element that closes the modal
-											var span = document.getElementsByClassName('close')[0];
-
-											// When the user clicks on <span> (x), close the modal
-											span.onclick = function() {
-													modal.style.display = 'none';
-											}
-									</script>";
-							}else{
-									echo "Error: file could not be displayed";
+											echo "<script>
+													var modal = document.getElementById('myModal');
+													var img = document.getElementById('myImg');
+													var modalImg = document.getElementById('img01');
+													var captionText = document.getElementById('caption');
+													img.onclick = function(){
+															modal.style.display = 'block';
+															modalImg.src = this.src;
+															captionText.innerHTML = this.alt;
+													}
+													var span = document.getElementsByClassName('close')[0];
+													span.onclick = function() {
+															modal.style.display = 'none';
+													}
+											</script>";
+									}else{
+											echo "Error: file could not be displayed";
+									}
 							}
 					}
+					$stmt->close();
 			}
 	}
 
