@@ -68,10 +68,18 @@
                                 if(!isset($_FILES['image']) || $_FILES['image']['error'] == UPLOAD_ERR_NO_FILE)
                                 {
                                     echo "No File Selected";
-                                }else
-                                {
-                                    Upload($image, $folder);
-                                    Display($image, $folder);
+                                } elseif ($_FILES['image']['size'] > 5000000) {
+                                    echo "File too large. Maximum 5MB.";
+                                } else {
+                                    $allowed_types = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG);
+                                    $detected_type = exif_imagetype($_FILES['image']['tmp_name']);
+                                    
+                                    if (!in_array($detected_type, $allowed_types)) {
+                                        echo "Invalid file type. Only GIF, JPEG, and PNG allowed.";
+                                    } else {
+                                        Upload($image, $folder);
+                                        Display($image, $folder);
+                                    }
                                 }
                             }
                         ?>
