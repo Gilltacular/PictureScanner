@@ -14,6 +14,15 @@
 
 ---
 
+## Status
+
+⚠️ **Completed University Project (2017)** — Security hardening and SQL injection fixes applied 2026.
+
+Core authentication system, session management, and registration flow are complete and secure. 
+Image upload and color scanning are functional. Search and delete features were planned but not implemented.
+
+---
+
 ## 🔐 Security-First Architecture
 
 This project implements security best practices throughout the application stack. Built with PHP, MySQL, and JavaScript featuring bcrypt + SHA512 password hashing, session hardening, and brute-force attack mitigation.
@@ -31,7 +40,8 @@ PictureScanner is a web-based image scanning application that allows users to up
 ## 🛠️ Tech Stack
 
 - **Frontend:** HTML5, CSS3, JavaScript, Bootstrap
-- **Backend:** PHP, MySQL
+- **Backend:** PHP, MySQL (mysqli with prepared statements)
+- **Note:** Uses Bootstrap 3 (legacy). Fully functional but would require migration for Bootstrap 5 compatibility.
 - **Authentication:** bcrypt + SHA512, session management
 - **Architecture:** MVC-inspired separation of concerns
 
@@ -42,7 +52,7 @@ PictureScanner is a web-based image scanning application that allows users to up
 - Password Hashing — Combined bcrypt and SHA512 for defense-in-depth
 - Session Hardening — Regenerated session IDs on login, timeout enforcement
 - Brute-Force Protection — Login attempt throttling and account lockout
-- SQL Injection Prevention — Prepared statements (PDO) throughout
+- SQL Injection Prevention — Prepared statements (mysqli) throughout authentication and registration flows
 - XSS Mitigation — Input sanitization and output escaping
 - CSRF Protection — Token-based request validation
 
