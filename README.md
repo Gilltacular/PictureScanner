@@ -25,7 +25,7 @@ This web application implements a **defense-in-depth security model** throughout
 - Parameterized queries — mitigates OWASP A03 (Injection)
 - Input validation and output encoding — mitigates OWASP A03 and A07 (Cross-Site Scripting)
 
-[View full threat model →](#threat-model-stride-analysis) (coming soon...)
+[Jump to full threat model](#threat-model-stride-analysis)
 
 ---
 
@@ -88,7 +88,7 @@ PictureScanner is a web-based image scanning application that allows users to up
 
 ---
 
-## Threat Model (STRIDE Analysis)
+## Threat Model STRIDE Analysis
 
 A STRIDE threat model was conducted to identify potential attack vectors. This section documents the identified threats and their mitigations.
 
